@@ -23,7 +23,11 @@
   #d) P(X =< 6) -> pbinom
   pbinom(6, 10, 1/2)
   #e) 1 - P(X =< 6)
-  1- pbinom(6, 10, 1/2)
+  1- pbinom(6, 10, 1/2)#or
+  pbinom(6, 10, 1/2, lower.tail = F)
+  #Lower tail, false is eigenlijk spiegelen, je had 1-pbinom dus dan neem je alleen groter dan 6. 
+  #pbinom lower.tail false is hetzelfde als dit maar gespiegeld. 
+  #Beste is wel op gewoon met 1 - pbinom wanneer > en pbinom wanneer < te werken
   #f)!!! median = quantile 50% => qbinom (quantile function)
   qbinom(1/2, 10, 1/2) 
   #g)
@@ -82,4 +86,70 @@
   
 #Exercise5
 ############################### 
+  #a)
+  1-pt(1,15)
+  #b)
+  qt(0.95,15)#or
+  qt(0.05, 15, lower.tail = FALSE)
   
+#Exercise 6
+############################### 
+  qchisq(0.95, 10)#or
+  qchisq(0.05, 10, lower.tail = FALSE) 
+  
+#Exercise 7
+############################### 
+  #a)
+  diff(pf(c(5,10), 4, 9))
+  #b)
+  qf(0.95, 4, 9)
+  
+#Exercise 8
+###############################
+library(BSDA)
+library(PropCIs)  
+
+  #a)
+  conf <- 0.95
+  sigma <- 0.3
+  n <- 10  
+  xmean <- 41.924  
+  alpha <- 1-conf  
+  lcl <- xmean-qnorm(1-alpha/2)*sigma/sqrt(n)  
+  ucl <- xmean+qnorm(1-alpha/2)*sigma/sqrt(n)
+  result <- list(mean=xmean, lcl = lcl, ucl = ucl)
+  result  
+  #b)
+  zsum.test(mean.x = xmean, sigma.x = sigma, n.x = n, conf.level = conf)
+
+#Exercise 9
+###############################
+  n <- 20
+  conf <- 0.95    
+  xmean <- 750  
+  sigma <- 30  
+  alpha <- 1-conf  
+  zsum.test(mean.x = xmean, sigma.x = sigma, n.x = n, conf.level = conf)  
+
+#Exercise 10
+###############################
+  blood.df <- BLOOD
+  #a)
+  xmean <- mean(blood.df$X.age.)    
+  z.test(blood.df$X.age., mu = xmean, sigma.x = 5, conf.level = 0.90) 
+  #b)
+  t.test(blood.df$X.prolactn., conf.level = 0.95)
+  #c)
+  between50and60 <- subset(blood.df, blood.df$X.age.>50 & blood.df$X.age.<60)
+  proportion50and60 <- nrow(between50and60)/nrow(blood.df)   
+  proportion50and60      
+  #d)
+  prop.test(nrow(between50and60), nrow(blood.df))
+  #e)  
+  lower50 <- subset(blood.df, blood.df$X.age. < 50)  
+  #f)
+  nrow(lower50)
+  shapiro.test(lower50$X.testost.) #normality check because the sample size is small 
+  t.test(lower50$X.testost., conf.level = 0.99)  
+
+    

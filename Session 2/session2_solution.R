@@ -199,3 +199,4 @@ nrow(subset.df)
 shapiro.test(subset.df$testost)
 # now calculate confidence limits
 t.test(subset.df$testost, conf.level=0.99)
+
