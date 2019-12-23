@@ -85,3 +85,16 @@ kru.sig <- na.omit(kru.sig)
 dotchart(kru.sig[,1], labels = rownames(kru.sig), col = "red", xlim = c(52, 90))
 abline(v = 52.39141, lty = 2, col = "grey")
 
+###########################
+####       EXTRA        ###
+###########################
+
+# we can introduce the "Solution" factor in the model, but this is nested in the lab factor
+
+lab.aov3 <- aov(Diff~Lab+Rep+Sol%in%Lab+Lab:Rep, 
+                contrasts=list(Lab="contr.sum", Rep="contr.sum", Sol="contr.sum"),
+                data = lab.df)
+summary(lab.aov3)
+interaction.plot(lab.df$Lab, lab.df$Sol, lab.df$Diff, type="b", pch=c(18,24), col=c(1,2))
+
+anova(lab.aov, lab.aov3)
