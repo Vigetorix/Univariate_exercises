@@ -113,9 +113,10 @@ data.df <- FEV
   
   #X2 is not significant for prediction so we can assume there is no difference in smoking vs non smoking
   
-  #Oplossing online wat anders?
+  #OPLOSSING ONLINE PRECIES WAT ANDERS? R Value komt wel min of meer overeen dus misschien meerdere oplossingen?
   
   #e)
+  #Van notities van les: 
   #The poly terms make the model wrong for prediction. A lot of things can go wrong
   #Poly terms are good to explain what you have but are not good for prediction
   #Simpler models perform best for prediction.
