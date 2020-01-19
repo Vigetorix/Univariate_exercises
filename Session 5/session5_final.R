@@ -53,9 +53,11 @@ data.df <- FEV
   
   fev.lm <- lm(Fev~X2, data = data.df)
   summary(fev.lm)
+  #Should not be used to build a model, X2 may be significant, it does not produce a model with a good R^2
+  #value, so no good for prediction
   
   plot(data.df$Fev~data.df$X2)  
-  abline(fev.lm, col = "red")  
+  abline(fev.lm, col = "red") 
 
   #checking for linearity
   fit <- fitted(fev.lm)
@@ -70,7 +72,8 @@ data.df <- FEV
   plot(cooks.distance(fev.lm))   
   
   #d)
-  #Beste is om geen subset te nemen, alle data wordt gebruikt voor model te berkenen
+  #Beste is om geen subset te nemen, alle data wordt gebruikt voor model te berekenen
+  #Om te predicten data wel nodig
   
   names(data.df)
   fev.lm <- lm(Fev ~ Height+Age+X1+X2+I(Height*X1)+I(Height*X2)+I(X1*X2)+I(Age*Height)+I(Age*X1)+I(Age*X2),

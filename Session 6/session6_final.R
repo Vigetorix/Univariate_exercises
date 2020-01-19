@@ -50,6 +50,7 @@ senic.df <- SENIC
   #d)
   aov <- aov(risk ~ reg, data = senic.df)
   summary(aov) #pvalue is small so H0: mu1 = mu2 = mu3=...=mn rejected
+  #there is much variation in the average between the different regions
   
   #e)
   diffs <- TukeyHSD(aov, which="reg", conf.level = 0.95)

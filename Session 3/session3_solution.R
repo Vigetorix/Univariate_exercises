@@ -14,7 +14,7 @@ shapiro.test(Belgium)
 # check variances equal or not:
 var.test(Iran, Belgium)
 
-# c & d
+# c & d 
 t.test(Iran, Belgium, var.equal=TRUE, conf.level=0.90)
 
 # e
